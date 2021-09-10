@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Hệ thống quản lý thư viện</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/webjars/font-awesome/5.15.2/css/all.css" />
+    <link rel="stylesheet" href="/webjars/bootstrap/4.6.0/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/Style.css" th:href="@{/css/Style.css}" />
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+</head>
+<div class="sidebar-header">
+    <div class="header">
+        <h1> <img src="../static/image/logo.jpg" th:src="@{/image/logo.jpg}" alt="Paris" width="80" height="80"> HỆ THỐNG QUẢN LÝ THƯ VIỆN
+        </h1>
+    </div>
+</div>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a class="active" href="/qltv/0"><i class="fas fa-home"></i>TRANG CHỦ</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/login"><i
+                            class="fas fa-sign-in-alt"></i>ĐĂNG NHẬP</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </nav>
+    <br>
+    <div class="main" style="margin-left:50px;margin-right:50px;padding:1px 16px;height:1000px;">
+        <div class="form-row" style="background-color:#2111 ;">
+            <div class="form-group col-md-4" style="margin-top: 10px;margin-bottom: 10px;">
+                <input type="search" id="seach" name="text" placeholder="Nguyễn Hữu Dự 31/12/2001" class="form-control">
+            </div>
+            <div class="form-group col-md-1.5" style="margin-top: 10px;margin-bottom: 10px;">
+                <label style="margin-left: 120px;">Thể Loại</label>
+            </div>
+            <div class="form-group col-md-3" style="margin-top: 10px;margin-bottom: 10px;">
+                <select name="" id="select" class="form-control"></select>
+            </div>
+        </div>
+        <br>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên Sách</th>
+                    <th scope="col">Tác Giả</th>
+                    <th scope="col">Thể Loại</th>
+                    <th scope="col">Trạng Thái</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Lựa Chọn</th>
+                </tr>
+            </thead>
+            <tbody id="table">
+
+            </tbody>
+        </table>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Mô Tả:</label>
+                            <textarea class="form-control" id="message-text" readonly></textarea>
+                        </div>
+                        <div class="col-form-label-lg" style="text-align: right;">
+                            <i class="fab fa-facebook-messenger" style="color:blue" id="iconMess"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Mã Sinh Viên:</label>
+                                <input type="number" class="form-control" id="id" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Mật Khẩu:</label>
+                                <input type="password" class="form-control" id="pass" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-outline-danger" id="btnsecurity" value="Xác Thực">
+                            </div>
+                        </form>
+                        <form>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea class="form-control" id="mess" required disabled></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" data-dismiss="modal" id="btnsend" value="Gửi" disabled>
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

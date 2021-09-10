@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Hệ thống quản lý thư viện</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/webjars/font-awesome/5.15.2/css/all.css" />
+    <link rel="stylesheet" href="/webjars/bootstrap/4.6.0/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/Style.css" th:href="@{/css/Style.css}" />
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+</head>
+<div class="sidebar-header">
+    <div class="header">
+
+        <div class="form-row" style="margin-top: 20px;">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-1">
+                <img src="../static/image/logo.jpg" th:src="@{/image/logo.jpg}" alt="Paris" width="80" height="80"></div>
+            <div class="form-group col-md-8">
+                <h1> HỆ THỐNG QUẢN LÝ THƯ VIỆN  </h1>
+            </div>
+            <div class="form-group col-md-1">
+                <img src="https://img-cdn.2game.vn/pictures/images/2015/12/31/2game_pocket_dai_chien_logo1.png" th:src="${avatar}" id="avatar" alt="Avatar" width="30px">
+                <i class="fas fa-bell IconMessage" style="color: aqua;"><label style="color:red;" id = noti th:text="${noti}"></label></i>
+                <!-- <label><a style="float:right;font-size: 20px;color: #ffff;" th:href="@{/logout}" th:text="${userName}"></a></label> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<body>
+    <div class="menubar">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="active" href="/qltv/1"><i class="fas fa-home"></i>TRANG CHỦ</a></li>
+                <li class="breadcrumb-item"><a href="/qltv/1/dkmuontras" class="btnDkmuontra"><i class="fas fa-pen"></i>ĐĂNG KÝ</a></li>
+                <li class="breadcrumb-item"><a href="/qltv/1/theloais" class="btnTheLoai"><i class="fas fa-project-diagram"></i>THỂ LOẠI</a></li>
+                <li class="breadcrumb-item"><a href="/qltv/1/chucvus" class="btnchucvu"><i class="fas fa-transgender-alt"></i>VAI TRÒ(*)</a></li>
+                <li class="breadcrumb-item"><a href="/qltv/1/nhanviens" class="btnNhanVien"><i class="fas fa-user-shield"></i>NHÂN VIÊN(*)</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="/qltv/1/sachs" class="btnSach"><i class="fas fa-book"></i>SÁCH</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="/qltv/1/khoas" class="btnKhoa"><i class="fas fa-graduation-cap"></i>KHOA</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="/qltv/1/lops" class="btnLop"><i class="fas fa-user-friends"></i>LỚP</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="/qltv/1/sinhviens" class="btnSinhVien"><i class="fas fa-user-graduate"></i>SINH VIÊN</a></li>
+                <li class="breadcrumb-item active" aria-current="page" sec:authorize="!isAuthenticated()"><a href="/login"><i class="fas fa-sign-in-alt"></i>ĐĂNG NHẬP</a></li>
+                <li class="breadcrumb-item active" aria-current="page" sec:authorize="isAuthenticated()"><a href="/logout"><i class="fas fa-sign-in-alt"></i>ĐĂNG XUẤT</a></li>
+            </ol>
+        </nav>
+        <!-- /Breadcrumb -->
+    </div>
+    <div id="form-seach" style="border:1px solid #0000;border-radius: 5px;padding-left: 5px;background-color: rgba(19, 179, 233, 0.467);padding-top: 10px;">
+        <!-- <div class="form-row" style="background-color:#2111 ;margin-left: 20px;margin-right: 20px;">
+            <div class="form-group col-md-4" style="margin-top: 10px;margin-bottom: 10px;">
+                <input type="search" id="inputseach" name="text" placeholder="" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <select name="" id="selectseach1" class="form-control" style="margin-top: 10px;margin-bottom: 10px;"></select>
+            </div>
+            <div class="form-group col-md-3">
+                <select name="" id="selectseach" class="form-control" style="margin-top: 10px;margin-bottom: 10px;"></select>
+            </div>
+            <div class="form-group col-md-1" style="margin-top: 10px;margin-bottom: 10px;align-items: right;">
+                <input type='checkbox' id='is_checked'>
+            </div>
+        </div> -->
+    </div>
+    <br>
+    <div class="main" style="align-items: center;padding:1px 16px;height:1000px;">
+        <div class="container" id="contai">
+            <div class="main-body">
+                <div class="row gutters-sm" id="info">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" th:src="${avatar}" alt="Admin" class="rounded-circle" width="150">
+                                    <div class="mt-3">
+                                        <p class="text-secondary mb-1" th:text="${role}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Họ Và Tên</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <h6 th:text=${user.name}></h6>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <h6 th:text=${user.emailNumber}></h6>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Số Điện Thoại</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <h6 th:text=${user.phoneNumber}></h6>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Mobile</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <h6 th:text=${user.phoneNumber}></h6>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Địa Chi</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <h6 th:text=${user.address}></h6>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="btnadd"></div>
+        <div id="root"></div>
+        <div class="alert" role="alert"></div>
+    </div>
+
+</body>
+
+</html>
